@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, OpenGLContext,
   // Hood
-  typmath, gl1draw, iniutil,
+  typmath, glport, iniutil,
   // Juju
   typutil, apputil;
 
