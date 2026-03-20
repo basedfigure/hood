@@ -5,7 +5,7 @@ unit game3d;
 interface
 
 uses
-  Classes, SysUtils, OpenGLContext,
+  Classes, SysUtils, OpenGLContext, gl,
   // Hood
   typmath, glport, iniutil,
   // Juju
@@ -20,8 +20,8 @@ type
     view, proj:  m16_t;
     near, far:  double;
   private
-    procedure set_dir;
-    procedure set_m16;
+    procedure set_dir ();
+    procedure set_m16 ();
   public
     port:  virt_view_t;
     fov:  int;
@@ -83,14 +83,28 @@ begin
   up:=xyz (0,1,0);
 end;
 
-procedure cam_t.set_dir;
+procedure cam_t.set_dir ();
 begin
-
+  dir.x:=Cos (rot.x) * Sin (rot.y);
+  dir.y:=Sin (rot.x);
+  dir.z:=Cos (rot.x) * Cos (rot.y);
+  dir.norm ();
+  view.look (dir, pos, up);
 end;
 
-procedure cam_t.set_m16;
+procedure cam_t.set_m16 ();
+var
+  p, v:  m16_a;
 begin
+  glEnable (GL_DEPTH_TEST);
 
+  p:=proj.col ();
+  glMatrixMode (GL_PROJECTION);
+  glLoadMatrixf (@p[0]);
+
+  v:=view.col ();
+  glMatrixMode (GL_MODELVIEW);
+  glLoadMatrixf (@v[0]);
 end;
 
 

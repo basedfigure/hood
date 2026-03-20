@@ -57,7 +57,7 @@ type
     procedure look (const at, pos, up: xyz_t);
     procedure pers (fov, rat, z1, z2: single);
     { Func }
-    function col: m16_a;
+    function col (): m16_a;
   end;
 
   function xyz (ax, ay, az: double): xyz_t;
@@ -162,7 +162,7 @@ begin
   self:=m16;
 end;
 
-procedure m16_t.look (const at,pos,up: xyz_t);
+procedure m16_t.look (const at,pos,up:  xyz_t);
 var
   f,s,u: xyz_t;
 begin
@@ -212,7 +212,7 @@ begin
   w:=0;
 end;
 
-function m16_t.col: m16_a;
+function m16_t.col (): m16_a;
 { OpenGL column major matrix converter }
 var
   a: m16_a;

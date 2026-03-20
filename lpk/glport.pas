@@ -15,6 +15,7 @@ var
 
 
   procedure gl_port_draw (var win:  TOpenGLControl);
+
 implementation
 
 procedure gl_port_draw (var win:  TOpenGLControl);
